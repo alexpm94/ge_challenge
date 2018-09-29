@@ -18,7 +18,7 @@ int main()
    fclose (gpmc_ad4);
    
    //this part here exports gpio36
-   gets(export_file);
+   //gets(export_file);
    export_file = fopen ("/sys/class/gpio/export", "w");
    fwrite (gpio, 1, sizeof(gpio), export_file);
    fclose (export_file);
