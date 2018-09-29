@@ -1,2 +1,1 @@
-Test: Test.c Test.c
-     ${}gcc -o Test -I.
+Test: Test.c `pwd`/gcc-linaro-6.4.1-2018.05-x86_64_arm-linux-gnueabihf/bin/arm-linux-gnueabihf-gcc -o Test -I.
