@@ -5,10 +5,10 @@ int main()
 {
     FILE *io,*iodir,*ioval;
 
-    io = fopen("/sys/class/gpio/export", "w");
+ /*    io = fopen("/sys/class/gpio/export", "w");
     fseek(io,0,SEEK_SET);
     fprintf(io,"%d",39);
-    fflush(io);
+    fflush(io); */
 
     iodir = fopen("/sys/class/gpio/gpio39/direction", "w");
     fseek(iodir,0,SEEK_SET);
@@ -28,7 +28,7 @@ int main()
         sleep(1);
     }
 
-fclose(io);
+//fclose(io);
 fclose(iodir);
 fclose(ioval);
 return 0;
