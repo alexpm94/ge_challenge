@@ -29,8 +29,20 @@ int main()
    fwrite(direction, 1, sizeof(direction), IO_direction); //set the pin to HIGH
    fclose(IO_direction);
    
-   //gets(IO_value);
-   /* IO_value = fopen ("/sys/class/gpio/gpio36/value", "w");
-   fwrite (uno, 1, sizeof(uno), IO_value); //set the pin to HIGH
-   fclose (IO_value); */
+   //Read Value:
+    char c[1];
+    FILE *fptr;
+
+    if ((fptr = fopen("/sys/class/gpio/gpio36/value", "r")) == NULL)
+    {
+        printf("Error! opening file");
+        // Program exits if file pointer returns NULL.
+        exit(1);         
+    }
+
+    // reads text until newline 
+    fscanf(fptr,"%[^\n]", c);
+
+    printf("Data from the file:\n%s", c);
+    fclose(fptr);
 }
