@@ -13,15 +13,15 @@ int main()
    char direction[] = "in";
    char gpio[] = "36";
    
-   //this part here exports gpio36
-   //gets(export_file);
-   // export_file = fopen ("/sys/class/gpio/export", "w");
-   // fwrite (gpio, 1, sizeof(gpio), export_file);
-   // fclose (export_file);
-   
-   /* gpmc_ad4 = fopen ("/sys/kernel/debug/omap_mux/gpmc_ad4", "w");
+   gpmc_ad4 = fopen ("/sys/kernel/debug/omap_mux/gpmc_ad4", "w");
    fwrite (diescisiete, 1, sizeof(diescisiete), gpmc_ad4);
-   fclose (gpmc_ad4); */
+   fclose (gpmc_ad4);
+   
+   //this part here exports gpio36
+   gets(export_file);
+   export_file = fopen ("/sys/class/gpio/export", "w");
+   fwrite (gpio, 1, sizeof(gpio), export_file);
+   fclose (export_file);
    
    //this part here sets the direction of the pin
    //gets(IO_direction);
@@ -30,7 +30,7 @@ int main()
    fclose(IO_direction);
    
    //gets(IO_value);
-/*    IO_value = fopen ("/sys/class/gpio/gpio36/value", "w");
+   /* IO_value = fopen ("/sys/class/gpio/gpio36/value", "w");
    fwrite (uno, 1, sizeof(uno), IO_value); //set the pin to HIGH
    fclose (IO_value); */
 }
