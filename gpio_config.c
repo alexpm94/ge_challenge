@@ -15,7 +15,7 @@ int main()
    
    //this part here exports gpio36
    //gets(export_file);
-   export_file = fopen ("/home/debian/prueba", "w");
+   export_file = fopen ("prueba.txt", "w");
    fwrite (gpio, 1, sizeof(gpio), export_file);
    fclose (export_file);
    
