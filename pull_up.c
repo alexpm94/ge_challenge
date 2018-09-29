@@ -6,15 +6,12 @@ int main()
 {
    FILE *export_file = NULL; //declare pointers
    FILE *IO_direction = NULL;
-   FILE *IO_value = NULL;
    FILE *IO_pullup=NULL;
 
    char str1[] = "17";
-   char str2[] = "0";
    char str3[] = "in";
    char str[] = "36";
 
-   char ch;
 
    //this activates pull up
    IO_pullup = fopen("/sys/kernel/debug/omap_mux/gpmc_ad4", "w");
