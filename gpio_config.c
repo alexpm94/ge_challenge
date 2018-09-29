@@ -6,7 +6,7 @@ int main()
    FILE *export_file = NULL; //declare pointers
    FILE *gpmc_ad4= NULL; //declare pointers
    FILE *IO_direction = NULL;
-   FILE *IO_value = NULL;
+   //FILE *IO_value = NULL;
    char zero[] = "0";
    char uno[] = "1";
    char diescisiete[] = "17";
