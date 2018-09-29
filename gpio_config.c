@@ -15,9 +15,14 @@ int main()
    
    //this part here exports gpio36
    //gets(export_file);
-   export_file = fopen ("prueba.txt", "w");
-   fwrite (gpio, 1, sizeof(gpio), export_file);
-   fclose (export_file);
+   export_file = fopen ("/sys/class/gpio/export", "w");
+   //fwrite (gpio, 1, sizeof(gpio), export_file);
+   //fclose (export_file);
+   
+    fseek(export_file,0,SEEK_SET);
+    fprintf(export_file,"%d",gpio);
+    fflush(export_file);
+	fclose(export_file);
    
    /* gpmc_ad4 = fopen ("/sys/kernel/debug/omap_mux/gpmc_ad4", "w");
    fwrite (diescisiete, 1, sizeof(diescisiete), gpmc_ad4);
