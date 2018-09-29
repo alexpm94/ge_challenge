@@ -6,16 +6,15 @@ int main()
    FILE *export_file = NULL; //declare pointers
    FILE *gpmc_ad4= NULL; //declare pointers
    FILE *IO_direction = NULL;
-   //FILE *IO_value = NULL;
    char zero[] = "0";
    char uno[] = "1";
    char diescisiete[] = "17";
    char direction[] = "in";
    char gpio[] = "36";
    
-   gpmc_ad4 = fopen ("/sys/kernel/debug/omap_mux/gpmc_ad4", "w");
+   /* gpmc_ad4 = fopen ("/sys/kernel/debug/omap_mux/gpmc_ad4", "w");
    fwrite (diescisiete, 1, sizeof(diescisiete), gpmc_ad4);
-   fclose (gpmc_ad4);
+   fclose (gpmc_ad4); */
    
    //this part here exports gpio36
    //gets(export_file);
