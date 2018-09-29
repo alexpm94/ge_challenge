@@ -19,10 +19,14 @@ int main()
    
    //this part here exports gpio36
    //gets(export_file);
-   printf("Modificando export");
    /* export_file = fopen ("/sys/class/gpio/export", "w");
    fwrite (gpio, 1, sizeof(gpio), export_file);
    fclose (export_file); */
+    printf("Modificando export");
+    export_file = fopen("/sys/class/gpio/export", "w");
+    fseek(export_file,0,SEEK_SET);
+    fprintf(export_file,"%d",gpio);
+    fflush(export_file);
    
    //this part here sets the direction of the pin
    printf("Modificando direction");
