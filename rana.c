@@ -5,7 +5,7 @@
 #include <time.h>
 #include <string.h>
 
-void GPIOREAD(char *url, char* val)
+void GPIOREAD(char *url, char *val)
 {
     FILE *path = fopen(url,"r");
     fread(val, 2, 1, path);
@@ -49,21 +49,38 @@ int main(void)
             if(!strcmp(val1,"1\n"))
             {
                 printf(" UP\n");
+				
+				
+				system("echo -n 0xCAFE0xCAFE0xBEBF >/dev/udp/192.168.64.64/8888");
+				
+                usleep(200000);
             }
             
             if(!strcmp(val2,"1\n"))
             {
                 printf(" DOWN\n");
+				
+				system("echo -n 0xCAFE0xCAFE0xBEC1 >/dev/udp/192.168.64.64/8888");
+				
+                usleep(200000);
             }
             
             if(val3[0] == '1')
             {
                 printf(" LEFT\n");
+				
+				system("echo -n 0xCAFE0xCAFE0xBEC2 >/dev/udp/192.168.64.64/8888");
+				
+                usleep(200000);
             }
             
             if(!strcmp(val4,"1\n"))
             {
                 printf(" RIGHT\n");
+				
+				system("echo -n 0xCAFE0xCAFE0xBEC0 >/dev/udp/192.168.64.64/8888");
+				
+                usleep(200000);
             }
            			
         }
