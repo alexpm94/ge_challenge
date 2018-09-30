@@ -15,6 +15,12 @@ void GPIOREAD(char *url, char* val)
 int main(void) 
 {
 
+	int n1=0;
+	int n2=0;
+	int n3=0;
+	int n4=0;
+	int n5=0;
+
    // unsigned int cnt=0;
 
     //set GPIO 45 as output
@@ -23,7 +29,7 @@ int main(void)
     //set GPIO 26 as output
     system("echo in > /sys/class/gpio/gpio44/direction");
 
-    //set GPIO 45 as output
+    //set GPIO 45 as output1
     system("echo in > /sys/class/gpio/gpio46/direction");
 
     //set GPIO 45 as output
@@ -50,12 +56,14 @@ int main(void)
             {
                 printf(" UP\n");
                 usleep(200000);
+                n1=5;
             }
             
             if(!strcmp(val2,"1\n"))
             {
                 printf(" DOWN\n");
                 usleep(200000);
+                sec=2;
             }
             
             if(val3[0] == '1')
