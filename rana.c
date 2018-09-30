@@ -11,6 +11,7 @@
   
 #define PORT 8888
 #define MAXLINE 1024
+#define IP 192.168.64.64
 
 void GPIOREAD(char *url, char *val)
 {
@@ -57,7 +58,7 @@ int main(void)
     // server information 
     servaddr.sin_family = AF_INET; 
     servaddr.sin_port = htons(PORT); 
-    servaddr.sin_addr.s_addr = INADDR_ANY; 
+    servaddr.sin_addr.s_addr = IP; 
     int n, len; 
 
     while(1)
