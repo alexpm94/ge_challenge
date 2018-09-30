@@ -5,12 +5,7 @@
 #include <time.h>
 #include <string.h>
 
-void sig_handler(int signo)
-{
-    if (signo == SIGINT)
-    printf("\nRecieved SIGINT\n");
-    exit(1);
-}
+
 
 void GPIOREAD(char *url, char* val)
 {
@@ -22,53 +17,54 @@ void GPIOREAD(char *url, char* val)
 int main(void) 
 {
 
-    int status;
     unsigned int cnt=0;
-
-    status = access("/sys/class/gpio/gpio44/value", F_OK );
-    if (status == -1)
-        {
-            //file doesnt exist
-            printf("GPIO_44 file doesnt exist dude\n");
-            exit(1);
-        } 
-
-/*     status = access("/sys/class/gpio/gpio45/value", F_OK ); 
-    if (status == -1)
-        {
-            //file doesnt exist
-            printf("GPIO_45 file doesnt exist dude\n");
-            exit(1);
-        } */
 
 
     //set GPIO 45 as output
     system("echo in > /sys/class/gpio/gpio44/direction");
     //system("echo out > /sys/class/gpio/gpio45/direction");
-    sleep(1);
 
-    char val[10];
+    //set GPIO 26 as output
+    system("echo in > /sys/class/gpio/gpio47/direction");
 
-	//strcpy(val,"1\n");
+    //set GPIO 45 as output
+    system("echo in > /sys/class/gpio/gpio46/direction");
+
+    //set GPIO 45 as output
+    system("echo in > /sys/class/gpio/gpio65/direction");
+
+
+    char val[1];
+    char val1[1];
+    char val2[1];
+    char val3[1];
+
     while(1)
         {
             GPIOREAD("/sys/class/gpio/gpio44/value", val);
-            printf("BUTTON STAT %s\n", val);
+            GPIOREAD("/sys/class/gpio/gpio47/value", val1);
+ 			GPIOREAD("/sys/class/gpio/gpio46/value", val2);
+  			GPIOREAD("/sys/class/gpio/gpio65/value", val3);
+  			
 
             if(!strcmp(val,"1\n"))
             {
-                printf("%u) ON\n", cnt);
-                //system("echo 1 > /sys/class/gpio/gpio45/value");
+                printf("%u) UP\n", cnt);
             }
-            else
-            {
-                printf("%u) OFF\n", cnt);
-                //system("echo 0 > /sys/class/gpio/gpio45/value");
+
+            if(!strcmp(val2,"1\n"))
+            	{
+                printf("%u) DOWN\n", cnt);
             }
-			
-			/* if(!strcmp(val,"1\n")){
-				strcpy(val,"0\n");
-			} else {strcpy(val,"1\n");} */
+            if(!strcmp(val1,"1\n"))
+            	{
+                printf("%u) LEFT\n", cnt);
+            }
+            if(!strcmp(val3,"1\n"))
+            	{
+                printf("%u) RIGHT\n", cnt);
+            }
+           			
         }
 
     return 0;
