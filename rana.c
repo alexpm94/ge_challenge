@@ -58,7 +58,7 @@ int main(void)
     // server information 
     servaddr.sin_family = AF_INET; 
     servaddr.sin_port = htons(PORT); 
-    servaddr.sin_addr.s_addr = "192.168.64.64"; 
+    servaddr.sin_addr.s_addr = inet_addr(192.168.64.64); 
     int n, len; 
 
     while(1)
