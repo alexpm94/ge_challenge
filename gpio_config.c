@@ -20,6 +20,7 @@ int main()
    //char diescisiete[] = "17";
    char direction[] = "in";
    char gpio[] = "44";
+   unsigned int cnt=0;
    
    /* gpmc_ad4 = fopen ("/sys/kernel/debug/omap_mux/gpmc_ad4", "w");
    fwrite (diescisiete, 1, sizeof(diescisiete), gpmc_ad4);
