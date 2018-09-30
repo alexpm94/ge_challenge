@@ -4,6 +4,13 @@
 #include <unistd.h>
 #include <time.h>
 #include <string.h>
+#include <sys/types.h> 
+#include <sys/socket.h> 
+#include <arpa/inet.h> 
+#include <netinet/in.h> 
+  
+#define PORT 8888
+#define MAXLINE 1024
 
 void GPIOREAD(char *url, char *val)
 {
@@ -34,6 +41,24 @@ int main(void)
     char val2[1];
     char val3[1];
     char val4[1];
+	
+	int sockfd; 
+    char buffer[MAXLINE]; 
+    struct sockaddr_in servaddr; 
+  
+    // Creating socket file descriptor 
+    if ( (sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) { 
+        perror("socket creation failed"); 
+        exit(EXIT_FAILURE); 
+    } 
+  
+    memset(&servaddr, 0, sizeof(servaddr)); 
+      
+    // server information 
+    servaddr.sin_family = AF_INET; 
+    servaddr.sin_port = htons(PORT); 
+    servaddr.sin_addr.s_addr = INADDR_ANY; 
+    int n, len; 
 
     while(1)
         {
@@ -49,9 +74,19 @@ int main(void)
             if(!strcmp(val1,"1\n"))
             {
                 printf(" UP\n");
-				
-				
-				system("echo -n 0xCAFE0xCAFE0xBEBF >/dev/udp/192.168.64.64/8888");
+				//system("echo -n 0xCAFE0xCAFE0xBEBF >/dev/udp/192.168.64.64/8888");
+				char *msg = "0xCAFE0xCAFE0xBEBF";
+				sendto(sockfd, (const char *)msg, strlen(msg), 
+				MSG_CONFIRM, (const struct sockaddr *) &servaddr,  
+					sizeof(servaddr)); 
+				printf("Message sent.\n"); 
+					  
+				n = recvfrom(sockfd, (char *)buffer, MAXLINE,  
+							MSG_WAITALL, (struct sockaddr *) &servaddr, 
+							&len); 
+				buffer[n] = '\0'; 
+				printf("Server : %s\n", buffer); 
+				close(sockfd); 
 				
                 usleep(200000);
             }
@@ -60,7 +95,20 @@ int main(void)
             {
                 printf(" DOWN\n");
 				
-				system("echo -n 0xCAFE0xCAFE0xBEC1 >/dev/udp/192.168.64.64/8888");
+				//system("echo -n 0xCAFE0xCAFE0xBEC1 >/dev/udp/192.168.64.64/8888");
+				
+				char *msg = "0xCAFE0xCAFE0xBEC1";
+				sendto(sockfd, (const char *)msg, strlen(msg), 
+				MSG_CONFIRM, (const struct sockaddr *) &servaddr,  
+					sizeof(servaddr)); 
+				printf("Message sent.\n"); 
+					  
+				n = recvfrom(sockfd, (char *)buffer, MAXLINE,  
+							MSG_WAITALL, (struct sockaddr *) &servaddr, 
+							&len); 
+				buffer[n] = '\0'; 
+				printf("Server : %s\n", buffer); 
+				close(sockfd); 
 				
                 usleep(200000);
             }
@@ -69,7 +117,19 @@ int main(void)
             {
                 printf(" LEFT\n");
 				
-				system("echo -n 0xCAFE0xCAFE0xBEC2 >/dev/udp/192.168.64.64/8888");
+				//system("echo -n 0xCAFE0xCAFE0xBEC2 >/dev/udp/192.168.64.64/8888");
+				char *msg = "0xCAFE0xCAFE0xBEC2";
+				sendto(sockfd, (const char *)msg, strlen(msg), 
+				MSG_CONFIRM, (const struct sockaddr *) &servaddr,  
+					sizeof(servaddr)); 
+				printf("Message sent.\n"); 
+					  
+				n = recvfrom(sockfd, (char *)buffer, MAXLINE,  
+							MSG_WAITALL, (struct sockaddr *) &servaddr, 
+							&len); 
+				buffer[n] = '\0'; 
+				printf("Server : %s\n", buffer); 
+				close(sockfd);
 				
                 usleep(200000);
             }
@@ -78,7 +138,19 @@ int main(void)
             {
                 printf(" RIGHT\n");
 				
-				system("echo -n 0xCAFE0xCAFE0xBEC0 >/dev/udp/192.168.64.64/8888");
+				//system("echo -n 0xCAFE0xCAFE0xBEC0 >/dev/udp/192.168.64.64/8888");
+				char *msg = "0xCAFE0xCAFE0xBEC0";
+				sendto(sockfd, (const char *)msg, strlen(msg), 
+				MSG_CONFIRM, (const struct sockaddr *) &servaddr,  
+					sizeof(servaddr)); 
+				printf("Message sent.\n"); 
+					  
+				n = recvfrom(sockfd, (char *)buffer, MAXLINE,  
+							MSG_WAITALL, (struct sockaddr *) &servaddr, 
+							&len); 
+				buffer[n] = '\0'; 
+				printf("Server : %s\n", buffer); 
+				close(sockfd);
 				
                 usleep(200000);
             }
