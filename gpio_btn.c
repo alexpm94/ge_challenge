@@ -5,8 +5,6 @@
 #include <time.h>
 #include <string.h>
 
-
-
 void GPIOREAD(char *url, char* val)
 {
     FILE *path = fopen(url,"r");
@@ -19,13 +17,11 @@ int main(void)
 
     unsigned int cnt=0;
 
-
     //set GPIO 45 as output
     system("echo in > /sys/class/gpio/gpio44/direction");
-    //system("echo out > /sys/class/gpio/gpio45/direction");
 
     //set GPIO 26 as output
-    system("echo in > /sys/class/gpio/gpio47/direction");
+    system("echo in > /sys/class/gpio/gpio36/direction");
 
     //set GPIO 45 as output
     system("echo in > /sys/class/gpio/gpio46/direction");
@@ -34,20 +30,23 @@ int main(void)
     system("echo in > /sys/class/gpio/gpio65/direction");
 
 
-    char val[1];
     char val1[1];
     char val2[1];
     char val3[1];
+    char val4[1];
 
     while(1)
         {
-            GPIOREAD("/sys/class/gpio/gpio44/value", val);
-            GPIOREAD("/sys/class/gpio/gpio47/value", val1);
- 			GPIOREAD("/sys/class/gpio/gpio46/value", val2);
-  			GPIOREAD("/sys/class/gpio/gpio65/value", val3);
+        	
+            GPIOREAD("/sys/class/gpio/gpio26/value", val1);
+            printf("%s",val1);
+            GPIOREAD("/sys/class/gpio/gpio44/value", val2);
+            
+ 			GPIOREAD("/sys/class/gpio/gpio46/value", val3);
+  			GPIOREAD("/sys/class/gpio/gpio65/value", val4);
   			
 
-            if(!strcmp(val,"1\n"))
+            if(!strcmp(val1,"1\n"))
             {
                 printf("%u) UP\n", cnt);
             }
@@ -56,11 +55,14 @@ int main(void)
             	{
                 printf("%u) DOWN\n", cnt);
             }
-            if(!strcmp(val1,"1\n"))
+
+            if(!strcmp(val3,"1\n"))
             	{
+            	printf(val1);
                 printf("%u) LEFT\n", cnt);
             }
-            if(!strcmp(val3,"1\n"))
+
+            if(!strcmp(val4,"1\n"))
             	{
                 printf("%u) RIGHT\n", cnt);
             }
