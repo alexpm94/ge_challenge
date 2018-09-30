@@ -11,7 +11,7 @@
   
 #define PORT 8888
 #define MAXLINE 1024
-#define IP 192.168.64.64
+#define IP "192.168.64.64"
 
 void GPIOREAD(char *url, char *val)
 {
