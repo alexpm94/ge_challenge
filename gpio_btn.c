@@ -49,21 +49,25 @@ int main(void)
             if(!strcmp(val1,"1\n"))
             {
                 printf(" UP\n");
+                usleep(200000);
             }
             
             if(!strcmp(val2,"1\n"))
             {
                 printf(" DOWN\n");
+                usleep(200000);
             }
             
             if(val3[0] == '1')
             {
                 printf(" LEFT\n");
+                usleep(200000);
             }
             
             if(!strcmp(val4,"1\n"))
             {
                 printf(" RIGHT\n");
+                usleep(200000);
             }
            			
         }
