@@ -30,7 +30,7 @@ int main(void)
 	servaddr.sin_addr.s_addr = inet_addr("192.168.64.64");
     int n, len; 
 
-    char mov = '';
+    char mov = 'd';
 
     while(1)
         {
