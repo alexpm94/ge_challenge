@@ -1,5 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+void GPIOREAD(char *url, char* val)
+{
+    FILE *path = fopen(url,"r");
+    fread(val, 2, 1, path);
+    fclose(path);
+}
 
 int main()
 {
@@ -11,7 +19,7 @@ int main()
    char uno[] = "1";
    //char diescisiete[] = "17";
    char direction[] = "in";
-   char gpio[] = "36";
+   char gpio[] = "44";
    
    /* gpmc_ad4 = fopen ("/sys/kernel/debug/omap_mux/gpmc_ad4", "w");
    fwrite (diescisiete, 1, sizeof(diescisiete), gpmc_ad4);
@@ -30,11 +38,11 @@ int main()
    
    //this part here sets the direction of the pin
    printf("Modificando direction");
-   IO_direction = fopen("/sys/class/gpio/gpio36/direction", "w");
+   IO_direction = fopen("/sys/class/gpio/gpio44/direction", "w");
    fwrite(direction, 1, sizeof(direction), IO_direction); //set the pin to HIGH
    fclose(IO_direction);
    
-   //Read Value:
+   /* //Read Value:
    printf("Leyendo valor");
     char c[1];
     FILE *fptr;
@@ -45,5 +53,30 @@ int main()
     fscanf(fptr,"%[^\n]", c);
 
     printf("Data from the file:\n%s", c);
-    fclose(fptr);
+    fclose(fptr); */
+	
+	char val[10];
+
+	//strcpy(val,"1\n");
+    while(1)
+        {
+            GPIOREAD("/sys/class/gpio/gpio44/value", val);
+            printf("BUTTON STATUS %s\n", val);
+
+            if(!strcmp(val,"1\n"))
+            {
+                printf("%u) ON\n", cnt);
+                //system("echo 1 > /sys/class/gpio/gpio45/value");
+            }
+            else
+            {
+                printf("%u) OFF\n", cnt);
+                //system("echo 0 > /sys/class/gpio/gpio45/value");
+            }
+			
+			/* if(!strcmp(val,"1\n")){
+				strcpy(val,"0\n");
+			} else {strcpy(val,"1\n");} */
+        }
+	return 0;
 }
