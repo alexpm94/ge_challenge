@@ -3,6 +3,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include <time.h>
+#include <string.h>
 
 void sig_handler(int signo)
 {
@@ -48,9 +49,10 @@ int main(void)
 
     char val[10];
 
+	strcpy(val,"1\n");
     while(1)
         {
-            GPIOREAD("/sys/class/gpio/gpio44/value", val);
+            //GPIOREAD("/sys/class/gpio/gpio44/value", val);
             printf("BUTTON STAT %s\n", val);
 
             if(!strcmp(val,"1\n"))
@@ -63,6 +65,10 @@ int main(void)
                 printf("%u) AAA LED --- OFF\n", cnt);
                 //system("echo 0 > /sys/class/gpio/gpio45/value");
             }
+			
+			if(!strcmp(val,"1\n")){
+				strcpy(val,"0\n");
+			} else {strcpy(val,"1\n");}
         }
 
     return 0;
